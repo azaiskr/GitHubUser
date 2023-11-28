@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detail.UserDetailActivity"
+    android:background="@color/navy_pastel_dark">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivBackground"
+                android:layout_width="match_parent"
+                android:layout_height="152dp"
+                android:layout_margin="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/_60_f_562566131_jwut3gvinai6b6rsaa0pybaecdahs1aj"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivUser"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background"
+                app:civ_border_color="@color/gray_light2"
+                app:civ_border_width="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivBackground"
+                app:layout_constraintEnd_toEndOf="@id/ivBackground"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="@id/ivBackground"
+                app:layout_constraintTop_toTopOf="@id/ivBackground" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Name"
+                android:textColor="@color/white2"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="@id/ivBackground"
+                app:layout_constraintStart_toStartOf="@id/ivBackground"
+                app:layout_constraintTop_toBottomOf="@id/ivUser" />
+
+            <TextView
+                android:id="@+id/userNameID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="username | ID"
+                android:textColor="@color/gray_light2"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/ivBackground"
+                app:layout_constraintStart_toStartOf="@id/ivBackground"
+                app:layout_constraintTop_toBottomOf="@id/name" />
+
+            <LinearLayout
+                android:id="@+id/linearContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@id/ivBackground"
+                app:layout_constraintStart_toStartOf="@id/ivBackground"
+                app:layout_constraintTop_toBottomOf="@id/userNameID">
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.Material3.CardView.Filled"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    app:cardBackgroundColor="@color/gray_dark2"
+                    app:cardCornerRadius="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/title_followers"
+                        android:textColor="@color/navy_pastel_dark"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/FollowersCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginEnd="16dp"
+                        android:textColor="@color/gray_light2"
+                        android:textStyle="bold"
+                        tools:text="0" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.Material3.CardView.Filled"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    app:cardBackgroundColor="@color/gray_dark2"
+                    app:cardCornerRadius="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="16dp"
+                        android:text="@string/title_following"
+                        android:textColor="@color/navy_pastel_dark"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/FollowingCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="0"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginEnd="16dp"
+                        android:textColor="@color/white2"
+                        android:textStyle="bold" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.Material3.CardView.Filled"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    app:cardBackgroundColor="@color/gray_dark2"
+                    app:cardCornerRadius="16dp">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/repository_submodule_svgrepo_com" />
+                    <TextView
+                        android:id="@+id/repoCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginEnd="16dp"
+                        tools:text="0"
+                        android:textColor="@color/white2"
+                        android:textStyle="bold" />
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/loadIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:indicatorSize="48dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivUser"
+                app:layout_constraintEnd_toEndOf="@+id/ivUser"
+                app:layout_constraintStart_toStartOf="@+id/ivUser"
+                app:layout_constraintTop_toTopOf="@+id/ivUser"
+                app:trackCornerRadius="2dp"
+                app:trackThickness="4dp" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:elevation="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearContainer"
+                app:tabMode="fixed"
+                android:background="?attr/colorSurfaceVariant"/>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="504dp"
+                android:background="?attr/colorSurface"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tabs"
+                app:layout_constraintVertical_bias="0.0" >
+            </androidx.viewpager2.widget.ViewPager2>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        style="?attr/floatingActionButtonSmallSecondaryStyle"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="108dp"
+        app:srcCompat="@drawable/share_fill1"
+        app:tint="@color/gray_light2"
+        android:backgroundTint="@color/gray_dark1"
+        android:focusable="true" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/red_ad0101"
+        app:srcCompat="@drawable/heart_plus_fill0"
+        app:tint="@color/white2"
+        android:focusable="true" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

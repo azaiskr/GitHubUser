@@ -33,17 +33,32 @@ class MainActivity : AppCompatActivity() {
     })
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Hide ActionBar
         supportActionBar?.hide()
 
+        // Initialize ViewModel
         val preferences = SettingPreferences.getInstance(application.dataStore)
-        val userListViewModel =
-            ViewModelProvider(this, VmFactoryPref(preferences))[UserListViewModel::class.java]
+        val userListViewModel = initUserListViewModel(preferences)
 
+        // Set up search functionality
+        setUpSearchFunctionality(userListViewModel)
+
+        // Set up RecyclerView
+        setUpRecyclerView()
+
+        // Observe ViewModel LiveData
+        observeViewModel(userListViewModel)
+    }
+
+    private fun initUserListViewModel(preferences: SettingPreferences): UserListViewModel {
+        return ViewModelProvider(this, VmFactoryPref(preferences))[UserListViewModel::class.java]
+    }
+
+    private fun setUpSearchFunctionality(userListViewModel: UserListViewModel) {
         with(binding) {
             searchBar.inflateMenu(R.menu.appmenu)
             searchBar.setOnMenuItemClickListener { menuItem ->
@@ -64,28 +79,36 @@ class MainActivity : AppCompatActivity() {
 
             searchView.setupWithSearchBar(searchBar)
             searchView.editText.setOnEditorActionListener { _, actionId, _ ->
-                val searchText = searchView.text.toString()
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    if (searchText.isNotEmpty()) {
-                        searchBar.textView.text = searchView.text
-                        userListViewModel.getUserList(searchText)
-                    } else {
-                        searchBar.textView.text = searchView.text
-                        userListViewModel.getUserList()
-                    }
-                    searchView.hide()
-                    true
-                } else {
-                    false
-                }
+                handleSearchAction(actionId, userListViewModel)
             }
         }
+    }
 
+    private fun handleSearchAction(actionId: Int, userListViewModel: UserListViewModel): Boolean {
+        val searchText = binding.searchView.text.toString()
+        return if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            if (searchText.isNotEmpty()) {
+                binding.searchBar.textView.text = searchText
+                userListViewModel.getUserList(searchText)
+            } else {
+                binding.searchBar.textView.text = searchText
+                userListViewModel.getUserList()
+            }
+            binding.searchView.hide()
+            true
+        } else {
+            false
+        }
+    }
+
+    private fun setUpRecyclerView() {
         binding.rvUser.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             setHasFixedSize(true)
         }
+    }
 
+    private fun observeViewModel(userListViewModel: UserListViewModel) {
         userListViewModel.apply {
             listUser.observe(this@MainActivity) { itemsItem ->
                 itemsItem?.let { setUserListData(it) }
@@ -96,7 +119,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
